@@ -68,13 +68,13 @@ source(file.path(dirname(getwd()), "config", "load_config.R"),
       * `load_config.R`
     * project1
       * `config_local.R`
-      * various programs and files
+      * ...
   * `AnalyticSoftwareInput`
     * project1
-      * various programs
+      * ...
   * `AnalyticSoftwareInternal`
     * project1
       * some project 1.csv
   * `AnalyticSoftwareOutput`
     * project1
-      * project1.csv
+      * ...
