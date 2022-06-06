@@ -80,4 +80,50 @@ source(file.path(dirname(getwd()), "config", "load_config.R"),
     * project1
       * ...
 
-### hfhf
+## How it works and how to work with it
+
+By running the code snippet above, we instantiate the framework, run configurations and load useful functions.
+
+You can now refer to files in a symbolic way because `e$authors` has the pysical path.
+
+```r
+authors <- read.csv(e$authors)
+```
+
+The framework does not depend on any external packages and can run with R v4.1 or higher. The flow is as follows:
+
+* The main program executes `load_config.R` and stores values & functions in an environment. In the above example it's simply `e`, but you can name it any way you like it.
+  1. Load `config_platform`, which creates variables relating to a specific execution environment, e.g. production on Linux or development on a Mac. The values are stored in `e`.
+  2. Load `config_global.R`, which stores values you wish to reuse across projects but not platforms.
+  3. Load `config_local.R`, which stores values you wish to reuse in your project.
+
+  The idea is that when you move a project to production, you only move `config_local.R`. The production box already has `config_platform` and `config_global.R`.
+
+For example, a target environment like test on a Mac defines a root folder for your files in `config_platform`:
+
+  ```r
+  fs_root = "~/Library/CloudStorage/OneDrive-NSWGOV"
+  ```
+
+The `config_global.R` defines the usual directory structure.
+
+```r
+app_root <- dirname(dirname(getwd()))
+app_input_dir <- file.path(app_root, "AnalyticSoftwareInput", app_folder)
+```
+
+You define a logical file `authors` in `config_local.R`
+
+```r
+authors <- file.path(app_input_dir, "authors.csv")
+```
+
+No matter which execution environment you are in, the file always resides in the input directory on that environment; the program hasn't changed.
+
+You may wish to be much more specific and define the file by reusing variable from `config_platform` in the following way:
+
+```r
+authors <- file.path(fs_root,"some input folder", "authors.csv")
+```
+
+In any case, the program has not changed, and the file path is right for the environment and you always access it by `e$authors`. On a different execution machine, the `config_platform` uses different paths, and the file magically uses them.
