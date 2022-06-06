@@ -51,14 +51,14 @@ If you are interested in such functionality without a lock-in, proprietory softw
 
 We often put software in one central place and conventions help to work together safely. `stager` assumes conventions and folder structure but you can change them easily to your needs.
 
-**Your R program starts with :**
+*Your R program starts with :*
 
 ```r
 source(file.path(dirname(getwd()), "config", "load_config.R"),
        local = e <- new.env())
 ```
 
-**Your directory structure is:**
+*Your directory structure is:*
 
 * Some root of software directory
   * `AnalyticSoftware`
@@ -75,6 +75,9 @@ source(file.path(dirname(getwd()), "config", "load_config.R"),
   * `AnalyticSoftwareInternal`
     * project1
       * some project 1.csv
+      * ...
   * `AnalyticSoftwareOutput`
     * project1
       * ...
+
+### hfhf
