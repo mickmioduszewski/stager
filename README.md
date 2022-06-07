@@ -1,21 +1,54 @@
 # stager
 
-  A flexible framework for separating R logic from the physical environment.
-It solves a set of real-world problems saving time without difficulty or costly overhead.
+`stager` is a flexible framework for separating R logic from its physical environment. It solves a set of real-world problems saving time without difficulty or costly overhead.
 
-## Broad challenge
+If you run the same program that uses files or database conenctions on different machines, operating systems, or share with your colleagues, this framework may save you time and reduce software fragility.
 
-When working with R programs and moving from Windows to a Mac or Linux, my input and output files may need to change from `C:\temp\some file.dat` to `~/local copy/temp/some file.dat`; similarly to database connections and many references to an external environment. It also happens when I move programs between production, development and test environments.
+It lets you reduce cognitive load by using conventions and reuse simple facilities like performance logging.
 
-I don't want to change an R program every time I move from Windows to Mac or Linux, because it is error-prone and wastes time. It's even worse if we collaborate because we can't predict what system my colleagues choose. I don't want me or them to go through the pain of changing file names, or worse being in the same code and changing simultaneously in different directions.
+This framework does not help with writing scripts that don't need to be portable or shared with other people.
+
+## Quick examples of value for the impatient
+
+### File naming portability
+
+A typical example will show that you can simply write a file on a Mac in the following way.
+
+```r
+write.csv(x, "~/output/temp/some file.dat")
+```
+
+You then choose to deploy it to production on a Windows production machine and it doesn't work unless you change **the program** to
+
+```r
+write.csv(x, "C:\\temp\\some file.dat")
+```
+
+It's error prone and wastes time. It's much better for the program to not have to change no matter where it runs. It's better to write symbolically,
+
+```r
+write.csv(x, e$authors)
+```
+
+and keep the definition of `e$authors` in an external configuration file. Now you can flip between operating systems, production, development, and test environments without changing the program. It saves time and debugging pain for you and your colleagues.
 
 If I maintain a program already in production, I don't want to find references to all external production resources and change them so it runs on my local machine. Worse, I don't want to introduce critical bugs by putting the software back and forgetting to change the environment references. There has to be a better way!
 
-30 years ago, I took a solution for granted. I don't want to struggle today.:boom:
+### Reuse of useful facilities
+
+Most of the time we don't log performance of out jobs until we have a problem. When we do, we wish we had a history of how the job used to run and compare to how it runs today.
+
+```r
+e$start_log()
+your program goes here...
+e$end_log()
+```
+
+The above fragment will log each job run, so you can use it later, and the output is in a csv file e.g. [example log file](AnalyticSoftwareInternal/Example/Example.csv)
 
 ## Broad solution
 
-One tiny snippet of code makes my future programs portable.
+One tiny snippet of code makes our future programs portable.
 
 ```r
 source(file.path(dirname(getwd()), "config", "load_config.R"),
@@ -32,9 +65,9 @@ authors <- read.csv(e$authors)
 
 On another system, `authors` might be  `"C:\\Users\\mick\\OneDrive-NSWGOV\\temp\\authors.csv"` with no change to the program.
 
-## `stager` solves portability challenges
+## `stager` aims to solve the following ortability and reusability challenges
 
-`stager` lets you keep my programs unchanged, no matter where they run.
+`stager` lets you keep programs unchanged, no matter where they run and make it easier to reuse.
 
 * You work on many projects and each may have many programs.
 * Each program wants to use the same files and database connections as the other program.
