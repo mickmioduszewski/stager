@@ -54,8 +54,6 @@ You could produce a historical performance picture
 
 ![sample](AnalyticSoftwareInternal/Example/log%20picture.png)
 
-<img alt="sample" src="https://github.com/mickmioduszewski/stager/blob/main/AnalyticSoftwareInternal/Example/log%20picture.png">
-
 ---
 
 ## Broad solution
