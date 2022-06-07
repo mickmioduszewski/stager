@@ -52,13 +52,9 @@ The above fragment will log each job instance, so you can use it later, and the 
 
 You could produce a historical performance picture
 
-![sample](AnalyticSoftwareInternal/Example/log picture.png)
+![sample](AnalyticSoftwareInternal/Example/log%20picture.png)
 
-<img
-src=“AnalyticSoftwareInternal/Example/log picture.png”
-raw=true
-alt=“sample”
-/>
+<img alt="sample" src="https://github.com/mickmioduszewski/stager/blob/main/AnalyticSoftwareInternal/Example/log%20picture.png">
 
 ---
 
