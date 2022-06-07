@@ -6,7 +6,9 @@ If you run the same program that uses files or database conenctions on different
 
 It lets you reduce cognitive load by using conventions and reuse simple facilities like performance logging.
 
-This framework does not help with writing scripts that don't need to be portable or shared with other people.
+This framework does not help with writing scripts that don't need to be portable, shared with other people, or use a standard way of structuring project files.
+
+---
 
 ## Quick examples of value for the impatient
 
@@ -34,6 +36,8 @@ and keep the definition of `e$authors` in an external configuration file. Now yo
 
 If I maintain a program already in production, I don't want to find references to all external production resources and change them so it runs on my local machine. Worse, I don't want to introduce critical bugs by putting the software back and forgetting to change the environment references. There has to be a better way!
 
+---
+
 ### Reuse of useful facilities
 
 Most of the time we don't log performance of out jobs until we have a problem. When we do, we wish we had a history of how the job used to run and compare to how it runs today.
@@ -44,11 +48,16 @@ your program goes here...
 e$end_log()
 ```
 
-The above fragment will log each job run, so you can use it later, and the output is in a csv file e.g. [example log file](AnalyticSoftwareInternal/Example/Example.csv)
+The above fragment will log each job instance, so you can use it later, and the output is in a csv file e.g. [example log file](AnalyticSoftwareInternal/Example/Example.csv)
+
+You could produce a historical performance picture
+![pic](AnalyticSoftwareInternal/Example/log picture.png)
+
+---
 
 ## Broad solution
 
-One tiny snippet of code makes our future programs portable.
+One tiny snippet of code makes our future programs portable and makes it easy to reuse functions without needing to build packages.
 
 ```r
 source(file.path(dirname(getwd()), "config", "load_config.R"),
@@ -65,6 +74,8 @@ authors <- read.csv(e$authors)
 
 On another system, `authors` might be  `"C:\\Users\\mick\\OneDrive-NSWGOV\\temp\\authors.csv"` with no change to the program.
 
+---
+
 ## `stager` aims to solve the following ortability and reusability challenges
 
 `stager` lets you keep programs unchanged, no matter where they run and make it easier to reuse.
@@ -79,6 +90,8 @@ On another system, `authors` might be  `"C:\\Users\\mick\\OneDrive-NSWGOV\\temp\
 * You also like to reuse the same functions across programs and projects without having to make packages.
 
 If you are interested in such functionality without a lock-in, proprietory software and freedom to customise, read on.
+
+---
 
 ## Architecture and conventions
 
@@ -112,6 +125,8 @@ source(file.path(dirname(getwd()), "config", "load_config.R"),
   * `AnalyticSoftwareOutput`
     * project1
       * ...
+
+---
 
 ## How it works and how to work with it
 

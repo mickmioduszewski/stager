@@ -8,6 +8,7 @@ app_root <- dirname(dirname(getwd()))
 app_input_dir <- file.path(app_root, "AnalyticSoftwareInput", app_folder)
 app_output_dir <- file.path(app_root, "AnalyticSoftwareOutput", app_folder)
 app_internal_dir <- file.path(app_root, "AnalyticSoftwareInternal", app_folder)
+log_file <- file.path(app_internal_dir, paste0(app_folder, ".csv"))
 
 
 # get the main execution file name ####

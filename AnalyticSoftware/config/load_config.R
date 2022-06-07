@@ -33,15 +33,16 @@ start_log <- function() {
   new_temp <- data.frame(
     project = app_folder,
     program = app_main_src_fl,
-    start = format(Sys.time(),
-                   tz = Sys.timezone(),
-                   usetz = TRUE),
+    start = format(Sys.time()#,
+                   #tz = Sys.timezone(),
+                   #usetz = TRUE
+                   ),
     end = as.character(NA),
     duration = 0.0,
     stringsAsFactors = FALSE
   )
-  log_file <-
-    file.path(app_internal_dir, paste0(app_folder, ".csv"))
+  #log_file <-
+    #file.path(app_internal_dir, paste0(app_folder, ".csv"))
 
   if (file.exists(log_file)) {
     temp <- read.csv(log_file)
@@ -53,12 +54,13 @@ start_log <- function() {
 }
 end_log <- function() {
   end_time <- Sys.time()
-  log_file <-
-    file.path(app_internal_dir, paste0(app_folder, ".csv"))
+  #log_file <-
+    #file.path(app_internal_dir, paste0(app_folder, ".csv"))
 
   temp <- read.csv(log_file)
   start_time <- as.POSIXlt(temp$start[1], tz = Sys.timezone())
-  temp$end[1] <- format(end_time, tz = Sys.timezone(), usetz = TRUE)
+  temp$end[1] <- format(end_time#, tz = Sys.timezone(), usetz = TRUE
+                        )
   temp$duration[1] <-
     difftime(end_time, start_time, units = "secs")
   write.csv(x = temp,
