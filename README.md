@@ -51,6 +51,7 @@ e$end_log()
 The above fragment will log each job instance, so you can use it later, and the output is in a csv file e.g. [example log file](AnalyticSoftwareInternal/Example/Example.csv)
 
 You could produce a historical performance picture
+
 ![sample](AnalyticSoftwareInternal/Example/log picture.png)
 
 ---
