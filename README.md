@@ -54,6 +54,12 @@ You could produce a historical performance picture
 
 ![sample](AnalyticSoftwareInternal/Example/log picture.png)
 
+<img
+src=“AnalyticSoftwareInternal/Example/log picture.png”
+raw=true
+alt=“sample”
+/>
+
 ---
 
 ## Broad solution
