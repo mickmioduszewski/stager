@@ -133,6 +133,10 @@ Please see the [sample program here](AnalyticSoftware/Example/sample%20program%2
 
 The project structure is defined in `config_global.R`. If you wish to change the folder names or structure, change `config_global.R`.
 
+You define symbolics specific to a project in `config_local.R`.
+
+`config_local.R` or `config_global.R` may wish to reuse file roots or conenctions defined in `config_platform.R`.
+
 ## How it works and how to work with it
 
 By running the code snippet above, we instantiate the framework, run configurations and load useful functions.
@@ -180,3 +184,5 @@ authors <- file.path(fs_root,"some input folder", "authors.csv")
 ```
 
 In any case, the program has not changed, and the file path is right for the environment and you always access it by `e$authors`. On a different execution machine, the `config_platform` uses different paths, and the file magically uses them.
+
+Enjoy :v:
