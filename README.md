@@ -14,7 +14,7 @@ This framework does not help with writing scripts that don't need to be portable
 
 ### File naming portability
 
-A typical example will show that you can simply write a file on a Mac in the following way.
+A typical example on the web will show that you can simply write a file on a Mac in the following way.
 
 ```r
 write.csv(x, "~/output/temp/some file.dat")
@@ -56,7 +56,20 @@ You could produce a historical performance picture
 
 ---
 
-## Broad solution
+## Broad solution description
+
+`stager` lets you keep programs unchanged, no matter where they run and make it easier to reuse artefacts. I see the following needs, which are often unfulfiled.
+
+* You work on many projects and each may have many programs. You wish to reuse file definitions, database connections or functions between programs.
+
+* Sometimes you want to use the same files or connections across many projects.
+* Every time you take a program from production and run it on a local machine, you want to put files locally and not on the production server. When you put the program back to production, you want it to work on production files again without changing `R` code.
+* You work on a Mac and Windows. Each time you pick up a different machine, the file paths change, but you want the program to stay the same. You don't want to change your programs, but rather, use symbolic names for files and connections.
+* You want keep the physical names in configuration files so when the program moves, it uses these physical names automatically.
+* You also want all project structures to have a common directory structure so they are easy to navigate.
+* You want to have ready-made functions that work in any project or program without having to rewrite them again.
+
+If you are interested in such functionality without a lock-in, proprietory software and freedom to customise, read on.
 
 One tiny snippet of code makes our future programs portable and makes it easy to reuse functions without needing to build packages.
 
@@ -77,33 +90,22 @@ On another system, `authors` might be  `"C:\\Users\\mick\\OneDrive-NSWGOV\\temp\
 
 ---
 
-## `stager` aims to solve the following ortability and reusability challenges
-
-`stager` lets you keep programs unchanged, no matter where they run and make it easier to reuse.
-
-* You work on many projects and each may have many programs.
-* Each program wants to use the same files and database connections as the other program.
-* Sometimes you want to use the same connections across many projects.
-* Every time you take a program from production and run it on a local machine, you want to put files locally and not on the production server. When you put the program back to production, you want it to work on production files.
-* You work on a Mac and Windows. Each time you pick up a different machine, the file paths change.
-* You don't want to change your programs, but rather, use symbolic names for files and connections.
-* You keep the physical names in configuration files.
-* You also like to reuse the same functions across programs and projects without having to make packages.
-
-If you are interested in such functionality without a lock-in, proprietory software and freedom to customise, read on.
-
 ---
 
 ## Architecture and conventions
 
 We often put software in one central place and conventions help to work together safely. `stager` assumes conventions and folder structure but you can change them easily to your needs.
 
-*Your R program starts with :*
+**The framework currently assumes that the project's working directory is where the project has the main file and checks for it.** You can change or remove that dependency if you feel strongly about it.
+
+*Your R program starts with :
 
 ```r
 source(file.path(dirname(getwd()), "config", "load_config.R"),
        local = e <- new.env())
 ```
+
+Please see the [sample program here](AnalyticSoftware/Example/sample%20program%201.R)
 
 *Your directory structure is:*
 
@@ -128,6 +130,8 @@ source(file.path(dirname(getwd()), "config", "load_config.R"),
       * ...
 
 ---
+
+The project structure is defined in `config_global.R`. If you wish to change the folder names or structure, change `config_global.R`.
 
 ## How it works and how to work with it
 
